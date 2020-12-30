@@ -16,14 +16,14 @@
 # 3. Starting node doesnt necessarily need a science experiment due to Crew Reports and EVA Reports, but it would be nice
 # 4. Look up CTT to see how it handles patching in to the normal tech tree without rewriting files
 
-import ast
+import random
 
 TechTreePath = "GameData/Squad/Resources/TechTree.cfg"
 newTechTreePath = "GameData/Science+ Randomizer/RandomizedTechTree.cfg"
 
 lines = iter(open(TechTreePath, 'r'))
 Lines = []
-NodeList = []
+StartlessNodeList = []
 
 class TechNode:
 	def __init__(self, id, title, description, cost, hideEmpty,
@@ -78,8 +78,32 @@ for l in range(len(Lines)):
 				parent2_lineTo = Lines[l+22][12:]
 				parent2 = Parent(parent2_parentID, parent2_lineFrom, parent2_lineTo)
 
-			NodeList.append(TechNode(id, title, description, cost, hideEmpty,
-				nodeName, anyToUnlock, icon, pos, scale, parent1, parent2))
+			if 'start' not in str(id):
+				StartlessNodeList.append(TechNode(id, title, description, cost, hideEmpty,
+					nodeName, anyToUnlock, icon, pos, scale, parent1, parent2))
+			else:
+				StartNode = TechNode(id, title, description, cost, hideEmpty,
+					nodeName, anyToUnlock, icon, pos, scale, parent1, parent2)
+
+
+
+
+
+nodeShufleList = {}
+
+for n in range(len(StartlessNodeList)):
+	nodeShufleList[n] = StartlessNodeList[n].id
+
+random.shuffle(nodeShufleList)
+
+for n in range(len(StartlessNodeList)):
+	StartlessNodeList[n].id = nodeShufleList[n]
+
+NodeList = []
+NodeList.append(StartNode)
+for n in range(len(StartlessNodeList)):
+	NodeList.append(StartlessNodeList[n])
+
 
 with open(newTechTreePath, 'w') as newTechTree:
 	newTechTree.write('TechTree\n' + '{\n')
@@ -119,3 +143,4 @@ with open(newTechTreePath, 'w') as newTechTree:
 			)
 		newTechTree.write('\n	}\n')
 	newTechTree.write('}')
+
