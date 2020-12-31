@@ -102,12 +102,20 @@ for n in range(len(StartlessNodeList)):
 			if StartlessNodeList[n].Parent2.parentID == 'start':
 				parent2NodeList[n] = 'start'
 
-nodeShufleList = []
+nodeShufleList = {}
 for n in range(len(StartlessNodeList)):
-	nodeShufleList.append(StartlessNodeList[n].id)
+	nodeShufleList[n] = {'id':StartlessNodeList[n].id}
+	nodeShufleList[n]['title'] = StartlessNodeList[n].title
+	nodeShufleList[n]['description'] = StartlessNodeList[n].description
+	nodeShufleList[n]['icon'] = StartlessNodeList[n].icon
+	nodeShufleList[n]['nodeName'] = StartlessNodeList[n].nodeName
 random.shuffle(nodeShufleList)
 for n in range(len(StartlessNodeList)):
-	StartlessNodeList[n].id = nodeShufleList[n]
+	StartlessNodeList[n].id = nodeShufleList[n]['id']
+	StartlessNodeList[n].title = nodeShufleList[n]['title']
+	StartlessNodeList[n].description = nodeShufleList[n]['description']
+	StartlessNodeList[n].icon = nodeShufleList[n]['icon']
+	StartlessNodeList[n].nodeName = nodeShufleList[n]['nodeName']
 
 for n in range(len(StartlessNodeList)):
 	for p in parent1NodeList:
