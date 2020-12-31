@@ -186,7 +186,6 @@ def randomizeMe():
 
 root = tk.Tk()
 root.title("Science+ Randomizer")
-root.resizable(False, False)
 root.geometry("400x200+800+300")
 headerFrame = tk.Frame(root, width=100)
 warningFrame = tk.Frame(root, width=100)
@@ -195,10 +194,15 @@ def openNewWindow():
       
     newWindow = tk.Toplevel(root) 
     newWindow.title("Science+ Randomizer") 
-    newWindow.geometry("300x50+850+350") 
+    newWindow.geometry("300x80+850+350")
+
+    def quit():
+    	newWindow.destroy()
+    	root.destroy()
   
     # A Label widget to show in toplevel 
     tk.Label(newWindow, text ="Randomization Complete!", font='Helvetica 12').pack(side="top", pady=10) 
+    tk.Button(newWindow, text="OK", command=quit).pack(side="top")
 
 def buttonCommand():
 	openNewWindow()
