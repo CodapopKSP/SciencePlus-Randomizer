@@ -85,25 +85,54 @@ for l in range(len(Lines)):
 				StartNode = TechNode(id, title, description, cost, hideEmpty,
 					nodeName, anyToUnlock, icon, pos, scale, parent1, parent2)
 
-
-
-
-
-nodeShufleList = {}
+parent1NodeList = {}
+parent2NodeList = {}
 
 for n in range(len(StartlessNodeList)):
-	nodeShufleList[n] = StartlessNodeList[n].id
+	if StartlessNodeList[n].Parent1 != None:
+		for p in range(len(StartlessNodeList)):
+			if StartlessNodeList[n].Parent1.parentID == StartlessNodeList[p].id:
+				parent1NodeList[n] = [p]
+			if StartlessNodeList[n].Parent1.parentID == 'start':
+				parent1NodeList[n] = 'start'
+	if StartlessNodeList[n].Parent2 != None:
+		for p in range(len(StartlessNodeList)):
+			if StartlessNodeList[n].Parent2.parentID == StartlessNodeList[p].id:
+				parent2NodeList[n] = [p]
+			if StartlessNodeList[n].Parent2.parentID == 'start':
+				parent2NodeList[n] = 'start'
 
+nodeShufleList = []
+for n in range(len(StartlessNodeList)):
+	nodeShufleList.append(StartlessNodeList[n].id)
 random.shuffle(nodeShufleList)
-
 for n in range(len(StartlessNodeList)):
 	StartlessNodeList[n].id = nodeShufleList[n]
+
+for n in range(len(StartlessNodeList)):
+	for p in parent1NodeList:
+		if n == p:
+			x = str(parent1NodeList[n])
+			if x == 'start':
+				StartlessNodeList[n].Parent1.parentID = 'start'
+			else:
+				x = x.replace('[', '')
+				x = x.replace(']', '')
+				StartlessNodeList[n].Parent1.parentID = StartlessNodeList[int(x)].id
+	for p in parent2NodeList:
+		if n == p:
+			x = str(parent2NodeList[n])
+			if x == 'start':
+				StartlessNodeList[n].Parent2.parentID = 'start'
+			else:
+				x = x.replace('[', '')
+				x = x.replace(']', '')
+				StartlessNodeList[n].Parent2.parentID = StartlessNodeList[int(x)].id
 
 NodeList = []
 NodeList.append(StartNode)
 for n in range(len(StartlessNodeList)):
 	NodeList.append(StartlessNodeList[n])
-
 
 with open(newTechTreePath, 'w') as newTechTree:
 	newTechTree.write('TechTree\n' + '{\n')
@@ -143,4 +172,3 @@ with open(newTechTreePath, 'w') as newTechTree:
 			)
 		newTechTree.write('\n	}\n')
 	newTechTree.write('}')
-
