@@ -183,6 +183,7 @@ def randomizeMe():
 		newTechTree.write('}')
 
 
+# UI
 
 root = tk.Tk()
 root.title("Science+ Randomizer")
@@ -219,7 +220,5 @@ warning.pack(side="top")
 headerFrame.pack(side="top", pady=10)
 warningFrame.pack(side="top", pady=10)
 randomizeButton.pack(side="top", pady=10)
-
-
 
 root.mainloop()
