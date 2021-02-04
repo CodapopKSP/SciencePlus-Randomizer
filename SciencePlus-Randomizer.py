@@ -45,7 +45,9 @@ class Parent:
 		self.lineFrom=lineFrom
 		self.lineTo=lineTo
 
-def randomizeMe():
+def randomizeMe(seed):
+	if seed!='':
+		random.seed(seed)
 	lines = iter(open(TechTreePath, 'r'))
 	Lines = []
 	StartlessNodeList = []
@@ -160,6 +162,7 @@ def randomizeMe():
 				'		icon = ' + node.icon +
 				'		pos = ' + node.pos +
 				'		scale = ' + node.scale
+
 			)
 			if node.Parent1 != None:
 				newTechTree.write(
@@ -187,9 +190,10 @@ def randomizeMe():
 
 root = tk.Tk()
 root.title("Science+ Randomizer")
-root.geometry("400x200+800+300")
+root.geometry("400x220+800+300")
 headerFrame = tk.Frame(root, width=100)
 warningFrame = tk.Frame(root, width=100)
+seedFrame = tk.Frame(warningFrame, width=100)
 
 def openNewWindow(): 
       
@@ -207,18 +211,23 @@ def openNewWindow():
 
 def buttonCommand():
 	openNewWindow()
-	randomizeMe()
+	randomizeMe(seedInput.get())
 
 title = tk.Label(headerFrame, text="Science+ Randomizer", font='Helvetica 18 bold')
 author = tk.Label(headerFrame, text="Created by CodapopKSP", font='Helvetica 10 bold')
 warning = tk.Label(warningFrame, text="Warning: It is strongly recommended to only use this mod on new saves.\nPressing this button could very well corrupt your save file!")
+seedLabel = tk.Label(seedFrame, text="Seed:", font='Helvetica 10 bold')
+seedInput = tk.Entry(seedFrame)
 randomizeButton = tk.Button(root, width=20, fg="purple", text="Randomize!", font='Helvetica 12 bold', command=buttonCommand)
 
 title.pack(side="top")
 author.pack(side="top")
 warning.pack(side="top")
+seedLabel.pack(side="left")
+seedInput.pack(side="left")
 headerFrame.pack(side="top", pady=10)
 warningFrame.pack(side="top", pady=10)
-randomizeButton.pack(side="top", pady=10)
+seedFrame.pack(side="top", pady=10)
+randomizeButton.pack(side="top")
 
 root.mainloop()
