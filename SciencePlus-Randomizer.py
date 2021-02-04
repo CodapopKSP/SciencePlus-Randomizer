@@ -1,9 +1,3 @@
-# Planned Features
-# 1. Build new tech trees using TechTree.cfg and a seed
-# 2. Allow user to type in a seed
-# 3. Allow user to generate a random seed
-# 4. Hide tech tree nodes after the next node
-
 # Possible Later Features
 # 1. Randomize planets, experiment descriptions, starting Kerbals, contracts...
 # 2. Randomize science colors
@@ -191,6 +185,8 @@ def randomizeMe(seed):
 root = tk.Tk()
 root.title("Science+ Randomizer")
 root.geometry("400x220+800+300")
+root.iconbitmap(r'icon.ico')
+
 headerFrame = tk.Frame(root, width=100)
 warningFrame = tk.Frame(root, width=100)
 seedFrame = tk.Frame(warningFrame, width=100)
