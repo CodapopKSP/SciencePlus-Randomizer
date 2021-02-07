@@ -8,4 +8,4 @@ Warning: This mod is intended to be used only on new game folders. This mod may 
 
 ## Installation
 
-Simply download scienceplus-randomizer.exe and place it in your KSP game folder (in the same folder as the KSP.exe). You will also need to make an empty folder in your Game Data folder called "Science+ Randomizer", which is where the new tech tree will be created. Then you will need to run the .exe and press the button on the UI. That's it! Good luck!
+Simply download scienceplus-randomizer.exe and place it in your KSP game folder (in the same folder as the KSP.exe). Then you will need to run the .exe and press the button on the UI. The new Tech Tree will appear in GameData/SciencePlus-Randomizer and you will need to go into GameData/Squad/Resources and delete TechTree.cfg and paste in the randomized Tech Tree. That's it! Good luck!

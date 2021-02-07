@@ -14,7 +14,7 @@ import tkinter as tk
 import os
 
 TechTreePath = "GameData/Squad/Resources/TechTree.cfg"
-newTechTreePath = "GameData/Science+ Randomizer/RandomizedTechTree.cfg"
+newTechTreePath = "GameData/SciencePlus Randomizer/RandomizedTechTree.cfg"
 KSPDirectoryPath = os.path.dirname(os.path.realpath(__file__))
 
 class TechNode:
@@ -141,8 +141,8 @@ def randomizeMe(seed):
 	for n in range(len(StartlessNodeList)):
 		NodeList.append(StartlessNodeList[n])
 
-	if (os.path.isdir(KSPDirectoryPath + '\GameData\Science+ Randomizer')==False):
-		os.makedirs(KSPDirectoryPath + '\GameData\Science+ Randomizer')
+	if (os.path.isdir(KSPDirectoryPath + '\GameData\SciencePlus Randomizer')==False):
+		os.makedirs(KSPDirectoryPath + '\GameData\SciencePlus Randomizer')
 
 	with open(newTechTreePath, 'w') as newTechTree:
 		newTechTree.write('TechTree\n' + '{\n')
@@ -191,8 +191,8 @@ root = tk.Tk()
 root.title("Science+ Randomizer")
 root.geometry("400x220+800+300")
 
-if os.path.isdir(KSPDirectoryPath + '\GameData\Science+\Assets'):
-	root.iconbitmap(r"" + KSPDirectoryPath + "\\GameData\\Science+\\Assets\\icon.ico")
+if os.path.isdir(KSPDirectoryPath + '\GameData\SciencePlus\Assets'):
+	root.iconbitmap(r"" + KSPDirectoryPath + "\\GameData\\SciencePlus\\Assets\\icon.ico")
 
 headerFrame = tk.Frame(root, width=100)
 warningFrame = tk.Frame(root, width=100)
